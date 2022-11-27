@@ -283,7 +283,7 @@ def run(args, g, n_classes, cuda, n_running):
             #print(f"Run: {n_running}/{args.n_runs} | Epoch {epoch:05d} | Time(s) {np.mean(dur):.4f} | Loss {loss_D.item():.4f} | "
             #f"Val {eval_acc:.4f} | Test {test_acc:.4f} | Best Test {final_test_acc:.4f} | ETputs(KTEPS) {n_edges / np.mean(dur) / 1000:.2f}")
 
-    print()
+    #print()
     #print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     #print(args)
     #print(f"Param count: {param_count}")
