@@ -279,15 +279,11 @@ def run(args, g, n_classes, cuda, n_running):
             best_val_loss = val_loss
             best_eval_acc = eval_acc
             final_test_acc = test_acc
-        if epoch % log_every == 0:
+        #if epoch % log_every == 0:
+            #continue
             #print(f"Run: {n_running}/{args.n_runs} | Epoch {epoch:05d} | Time(s) {np.mean(dur):.4f} | Loss {loss_D.item():.4f} | "
             #f"Val {eval_acc:.4f} | Test {test_acc:.4f} | Best Test {final_test_acc:.4f} | ETputs(KTEPS) {n_edges / np.mean(dur) / 1000:.2f}")
 
-    #print()
-    #print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    #print(args)
-    #print(f"Param count: {param_count}")
-    #print(f"Test accuracy on {args.dataset}: {final_test_acc:.2%}\n")
     return best_eval_acc, final_test_acc
 
 
