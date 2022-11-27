@@ -122,14 +122,10 @@ def run(args, g, n_classes, cuda, n_running):
         print("Using THEIR knowledge")
         kd_path = "/drive/My Drive/cora-knowledge.pth.tar"
         #print("Using OUR knowledge")
-        our_kd_path = "/drive/My Drive/gcnII_90_accuracy.pth"
+        #our_kd_path = "/drive/My Drive/gcnII_90_accuracy.pth"
         assert os.path.isfile(kd_path), "Please download teacher knowledge first"
         knowledge = torch.load(kd_path, map_location=g.device)
-        our_knowledge = torch.load(our_kd_path, map_location=g.device)
-        print("THEIR KNOWLEDGE DICT")
-        print(knowledge.keys())
-        print("OUR KNOWLEDGE DICT")
-        print(our_knowledge.keys())
+        #our_knowledge = torch.load(our_kd_path, map_location=g.device)
         tea_logits = knowledge['logits']
         tea_emb = knowledge['embedding']
         if 'perm' in knowledge.keys() and args.dataset in ['arxiv', 'reddit']:
@@ -284,14 +280,14 @@ def run(args, g, n_classes, cuda, n_running):
             best_eval_acc = eval_acc
             final_test_acc = test_acc
         if epoch % log_every == 0:
-            print(f"Run: {n_running}/{args.n_runs} | Epoch {epoch:05d} | Time(s) {np.mean(dur):.4f} | Loss {loss_D.item():.4f} | "
-            f"Val {eval_acc:.4f} | Test {test_acc:.4f} | Best Test {final_test_acc:.4f} | ETputs(KTEPS) {n_edges / np.mean(dur) / 1000:.2f}")
+            #print(f"Run: {n_running}/{args.n_runs} | Epoch {epoch:05d} | Time(s) {np.mean(dur):.4f} | Loss {loss_D.item():.4f} | "
+            #f"Val {eval_acc:.4f} | Test {test_acc:.4f} | Best Test {final_test_acc:.4f} | ETputs(KTEPS) {n_edges / np.mean(dur) / 1000:.2f}")
 
     print()
-    print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    print(args)
-    print(f"Param count: {param_count}")
-    print(f"Test accuracy on {args.dataset}: {final_test_acc:.2%}\n")
+    #print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    #print(args)
+    #print(f"Param count: {param_count}")
+    #print(f"Test accuracy on {args.dataset}: {final_test_acc:.2%}\n")
     return best_eval_acc, final_test_acc
 
 
@@ -362,10 +358,10 @@ def main(args):
         test_accs.append(test_acc)
         args.seed += 1
 
-    print(f"Runned {args.n_runs} times")
-    print("Val Accs:", val_accs)
-    print("Test Accs:", test_accs)
-    print(f"Average val accuracy: {np.mean(val_accs)} ± {np.std(val_accs)}")
+    #print(f"Runned {args.n_runs} times")
+    #print("Val Accs:", val_accs)
+    #print("Test Accs:", test_accs)
+    #print(f"Average val accuracy: {np.mean(val_accs)} ± {np.std(val_accs)}")
     print(f"Average test accuracy on {args.dataset}: {np.mean(test_accs)} ± {np.std(test_accs)}")
     
 
@@ -390,8 +386,8 @@ if __name__ == '__main__':
     parser.add_argument("--g-critic", type=int, default=1, help="train generator")
     parser.add_argument("--n-runs", type=int, default=1, help="running times")
     args = parser.parse_args()
-    print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    print(args)
+    #print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    #print(args)
 
     main(args)
 
