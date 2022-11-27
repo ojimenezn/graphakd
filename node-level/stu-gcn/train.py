@@ -119,12 +119,17 @@ def run(args, g, n_classes, cuda, n_running):
     # load teacher knowledge
     if args.role == 'stu':
         #kd_path = os.path.join(args.kd_dir, args.dataset + f'-knowledge.pth.tar')
-        #print("Using THEIR knowledge")
-        #kd_path = "/drive/My Drive/cora-knowledge.pth.tar"
-        print("Using OUR knowledge")
-        kd_path = "/drive/My Drive/gcnII_90_accuracy.pth"
+        print("Using THEIR knowledge")
+        kd_path = "/drive/My Drive/cora-knowledge.pth.tar"
+        #print("Using OUR knowledge")
+        our_kd_path = "/drive/My Drive/gcnII_90_accuracy.pth"
         assert os.path.isfile(kd_path), "Please download teacher knowledge first"
         knowledge = torch.load(kd_path, map_location=g.device)
+        our_knowledge = torch.load(our_kd_path, map_location=g.device)
+        print("THEIR KNOWLEDGE DICT")
+        print(knowledge.keys())
+        print("OUR KNOWLEDGE DICT")
+        print(our_knowledge.keys())
         tea_logits = knowledge['logits']
         tea_emb = knowledge['embedding']
         if 'perm' in knowledge.keys() and args.dataset in ['arxiv', 'reddit']:
